@@ -180,10 +180,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-11-25 23:35:40 / Modified: 23:55:08" itemprop="dateCreated datePublished" datetime="2020-11-25T23:35:40+08:00">2020-11-25</time>
+              <time title="Created: 2020-11-25 23:35:40" itemprop="dateCreated datePublished" datetime="2020-11-25T23:35:40+08:00">2020-11-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-26 09:32:53" itemprop="dateModified" datetime="2020-11-26T09:32:53+08:00">2020-11-26</time>
+              </span>
 
           
 
@@ -198,8 +204,7 @@
       
           <meta name="referrer" content="no-referrer">
 
-<h1 id="Python-execute-file-decompile-to-source-py-code反编译实例"><a href="#Python-execute-file-decompile-to-source-py-code反编译实例" class="headerlink" title="Python execute file decompile to source py-code反编译实例"></a>Python execute file decompile to source py-code反编译实例</h1><p>工具：</p>
-<ol>
+<h1 id="Python-execute-file-decompile-to-source-py-code反编译实例"><a href="#Python-execute-file-decompile-to-source-py-code反编译实例" class="headerlink" title="Python execute file decompile to source py-code反编译实例"></a>Python execute file decompile to source py-code反编译实例</h1><h2 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h2><ol>
 <li><p>pyinstxtractor.py:</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/extremecoders-re/pyinstxtractor">https://github.com/extremecoders-re/pyinstxtractor</a></p>
 </li>
@@ -208,13 +213,32 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uncompyle6</span><br></pre></td></tr></table></figure>
 
-<p>准备好工具后将exe文件和pyinstxtractor.py放在同一目录中，如图：</p>
+<h2 id="生成pyc文件"><a href="#生成pyc文件" class="headerlink" title="生成pyc文件"></a>生成pyc文件</h2><p>准备好工具后将exe文件和pyinstxtractor.py放在同一目录中，如图：</p>
 <p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcXsqFbZ7S0R.a0Fmva4KQeyVIjZMA08iL.36rOUnLthzri701*Z0P5RlJQxNQd7INWBZs.Daj5UOkyiYsahMKFQ!/b&bo=BQM2AAAAAAADFwI!&rf=viewer_4" alt="image-20201125234025446"></p>
 <p>在当前目录载入cmd输入dos命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python pyinstxtractor.py test.exe</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python pyinstxtractor.py 文件名.exe</span><br></pre></td></tr></table></figure>
 
 <p>产生如下结果：</p>
 <p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5k36YlWMsVF.K1jlUse2Wv0oWv3jJU9A6EVD41*sgoPLwJWeXNcWIERdpENuMbJB1BhYDFEC1jemvJT6OKyW6cI!/b&bo=XQNQAQAAAAADBy0!&rf=viewer_4" alt="image-20201125235003567"></p>
+<p>根据信息我们可以知道打包的python版本3.8，由于pyinstxtractor.py中使用malshal模块，根据官方提示如下：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5thzuIgUOt5m0DzfS1fQuy3avQ0XNQv16aY9pIgnMgKiTUVUysSUjTMnA2pwIB2sl.yWLWTaBBTuBlr10j9I7UM!/b&bo=KARtAAAAAAADB2M!&rf=viewer_4" alt="image-20201126090546919"></p>
+<p>即推荐用同样py版本的marshal以避免错误，我们只需要安装python3.8版本，并调整环境变量即可：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcbv*pKK8DgW1NcwPrSnqDJjQ2s.gfzdcDwmJA4Degok.SDblgI1a76WhKFp14uPSb0Qjv2k3NFoyXdpsrtUoayc!/b&bo=ogLXAAAAAAADF0U!&rf=viewer_4" alt="image-20201126090804775"></p>
+<p>如果有电脑中有多个py版本，需要调整用户变量Path里的顺序，将所需版本的两个变量上移到其他版本之上，即为默认版本。</p>
+<p>正确解析后的文件夹名称为 <strong><em>xxx.exe_extracted</em></strong> 目录如下：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg57Khg3tqDcmL4ZvMt9ees6pVmZerZcTLdt4lJUkm9YrjvlY.CpjDnkNtnPV9duzKn8!/b&bo=9gIDAgAAAAADF8c!&rf=viewer_4" alt="image-20201126091323626"></p>
+<p>其中xxx.exe.manifest文件的前缀的xxx为我们所需源代码的文件名，如上图 <strong>CXscoreV7</strong>.我们最终需要从CXscore.pyc文件反编译出.py</p>
+<h2 id="反编译pyc"><a href="#反编译pyc" class="headerlink" title="反编译pyc"></a>反编译pyc</h2><p>cmd中cd到目标目录(.pyc所在目录)，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uncompyle6 文件名.pyc</span><br></pre></td></tr></table></figure>
+
+<p>得到如下结果：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg57TRFii1fmWi1YJm*DJ6wgKojYBCVL7eJlK0CRT*KxnISt44t8CARuHU4IVZwx*b1Y!/b&bo=kQS8AQAAAAADFxo!&rf=viewer_4" alt="image-20201126092318710"></p>
+<p>其中包含源代码：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg55HoCCt4DYlZYcefJkV9EXe*OGeawuPLYJbBpD15LH1fHI2tbMB0x.a..NMARGI2GM!/b&bo=sgRGAQAAAAADF8M!&rf=viewer_4" alt="image-20201126092343215"></p>
+<p>也肯包含解析失败的中间代码(类似汇编)：</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg56wcqbRbR5*1pPeLq8xr.*U3HqVKVwC0IfrgO0iAgY.v44EEhwHAtb.PYRUXjNyTGo!/b&bo=SwQFAgAAAAADF3o!&rf=viewer_4" alt="image-20201126092520072"></p>
+<p>失败的代码多数是中间某个函数,可能是由于python小版本不同产生的不兼容问题。不过问题不大，即使没学过汇编，我们也能猜测出这些类汇编代码的含义，从而完整复刻源码。方法大致如下:</p>
+<p>TO BE CONTINUED….</p>
 
       
     </div>
