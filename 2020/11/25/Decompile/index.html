@@ -35,8 +35,9 @@
 <meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg57TRFii1fmWi1YJm*DJ6wgKojYBCVL7eJlK0CRT*KxnISt44t8CARuHU4IVZwx*b1Y!/b&bo=kQS8AQAAAAADFxo!&rf=viewer_4">
 <meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg55HoCCt4DYlZYcefJkV9EXe*OGeawuPLYJbBpD15LH1fHI2tbMB0x.a..NMARGI2GM!/b&bo=sgRGAQAAAAADF8M!&rf=viewer_4">
 <meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg56wcqbRbR5*1pPeLq8xr.*U3HqVKVwC0IfrgO0iAgY.v44EEhwHAtb.PYRUXjNyTGo!/b&bo=SwQFAgAAAAADF3o!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5uraYCWyw5HYgIyiufahD0D8SOkw2s*a*98y400SC4tMMM618Y61ruWzFdmMYljNC9FKql0Nc2MOe9eJa4kvSPI!/b&bo=CARDAQAAAAADB2w!&rf=viewer_4">
 <meta property="article:published_time" content="2020-11-25T15:35:40.000Z">
-<meta property="article:modified_time" content="2020-11-26T01:32:53.819Z">
+<meta property="article:modified_time" content="2020-12-05T09:52:46.201Z">
 <meta property="article:author" content="Jackyhate">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -200,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 09:32:53" itemprop="dateModified" datetime="2020-11-26T09:32:53+08:00">2020-11-26</time>
+                <time title="Modified: 2020-12-05 17:52:46" itemprop="dateModified" datetime="2020-12-05T17:52:46+08:00">2020-12-05</time>
               </span>
 
           
@@ -247,10 +248,25 @@
 <p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg57TRFii1fmWi1YJm*DJ6wgKojYBCVL7eJlK0CRT*KxnISt44t8CARuHU4IVZwx*b1Y!/b&bo=kQS8AQAAAAADFxo!&rf=viewer_4" alt="image-20201126092318710"></p>
 <p>其中包含源代码：</p>
 <p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg55HoCCt4DYlZYcefJkV9EXe*OGeawuPLYJbBpD15LH1fHI2tbMB0x.a..NMARGI2GM!/b&bo=sgRGAQAAAAADF8M!&rf=viewer_4" alt="image-20201126092343215"></p>
-<p>也肯包含解析失败的中间代码(类似汇编)：</p>
+<p>也可能包含解析失败的中间代码(类似汇编)：</p>
 <p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcQCDLFiNbeMdwDi3HaWxg56wcqbRbR5*1pPeLq8xr.*U3HqVKVwC0IfrgO0iAgY.v44EEhwHAtb.PYRUXjNyTGo!/b&bo=SwQFAgAAAAADF3o!&rf=viewer_4" alt="image-20201126092520072"></p>
-<p>失败的代码多数是中间某个函数,可能是由于python小版本不同产生的不兼容问题。不过问题不大，即使没学过汇编，我们也能猜测出这些类汇编代码的含义，从而完整复刻源码。方法大致如下:</p>
-<p>TO BE CONTINUED….</p>
+<p>解析失败的代码多数是中间某个函数,可能是由于python小版本不同产生的不兼容问题。这些代码是<strong>dis模块</strong>将字节码反汇编后的结果，由字节码指令(Python Bytecode Instructions)组成。字节码指令的结构如下：</p>
+<blockquote>
+<p>源码行号 | 跳转注释符 | 指令在函数中的偏移 | 指令符号（助记符） | 指令参数 | 实际参数值</p>
+</blockquote>
+<p><em>注：上图中未显示跳转注释符，且省略了大部分指令参数</em></p>
+<p>不同指令符号的意义可参阅文档：<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/dis.html">dis官方文档</a></p>
+<p>上图中的前几行指令可翻译为如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getclassnum</span>(<span class="params">username, pwd, courseid, clazzid, cpi</span>):</span></span><br><span class="line">    url = <span class="string">&#x27;http://mooc1-api.chaoxing.com/mycourse/backclazzdata&#x27;</span></span><br><span class="line">    res = requests.get(url, headers=headers, cookies=cookies)</span><br></pre></td></tr></table></figure>
+
+<p>其中：函数定义在第一行，参数是整体复刻后推测的；下一行指源码中第19行偏移量为0处字符串’http…’入栈，在偏移量为2处将str储存到FAST型变量中，名称为url；再下一行是源码中20行，全局量requests入栈,属性get入栈，接着’url’,header和cookies分别入栈，由字符串组成的常量tuple入栈，根据文档中的解释</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5uraYCWyw5HYgIyiufahD0D8SOkw2s*a*98y400SC4tMMM618Y61ruWzFdmMYljNC9FKql0Nc2MOe9eJa4kvSPI!/b&bo=CARDAQAAAAADB2w!&rf=viewer_4" alt="img"></p>
+<p>可知CALL_FUNCTION_KW_3的作用机制：顶部元素是keyword组成的字符串元组，控制其下的关键字参数，因此’cookies’对应cookies，‘headers’对应headers；再下是位置参数url，底部是可调用的对象，也就是get。                                                                        即<strong>get(url, headers=headers, cookies=cookies)</strong>                                                                                                                                       最后将get的返回对象储存为res。如此根据文档和语法分析,我们就可以较为完整地还原python源码。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>如官方文档所提示的</p>
+<blockquote>
+<p><strong>CPython implementation detail:</strong> Bytecode is an implementation detail of the CPython interpreter. No guarantees are made that bytecode will not be added, removed, or changed between versions of Python. Use of this module should not be considered to work across Python VMs or Python releases.</p>
+</blockquote>
+<p>由于不同版本的python的字节码指令规则不同，反编译的python版本的对应是非常关键的，否则可能产生大量类汇编代码，甚至完全无法反汇编。</p>
 
     </div>
 
@@ -272,10 +288,7 @@
     <a href="/2020/11/24/A_SeriesOfFacts/" rel="prev" title="A Series of Fasts">
       <i class="fa fa-chevron-left"></i> A Series of Fasts
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/30/lovelog/" rel="next" title="Love Log">
-      Love Log <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -334,7 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-execute-file-decompile-to-source-py-code%E5%8F%8D%E7%BC%96%E8%AF%91%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">Python execute file decompile to source py-code反编译实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">工具：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90pyc%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">生成pyc文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91pyc"><span class="nav-number">1.3.</span> <span class="nav-text">反编译pyc</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-execute-file-decompile-to-source-py-code%E5%8F%8D%E7%BC%96%E8%AF%91%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">Python execute file decompile to source py-code反编译实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">工具：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90pyc%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">生成pyc文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91pyc"><span class="nav-number">1.3.</span> <span class="nav-text">反编译pyc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">1.4.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -350,20 +363,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
