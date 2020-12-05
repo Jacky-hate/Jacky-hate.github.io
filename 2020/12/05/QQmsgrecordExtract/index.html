@@ -20,17 +20,26 @@
     var CONFIG = {"hostname":"jacky-hate.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="QQmsgrecordExtract (免ROOT提取QQ聊天记录)本文将以HUAWEI mate20为例，展示非ROOT方法提取qq聊天记录的方法 本地所有的 QQ 用户数据、聊天记录及其系统设置都存储在后缀名为 db 的数据文件中，文件大小不定。根据安卓权限，访问这些文件需要开启ROOT权限，而HUAWEI自18年以后关闭了手机解锁码的官方获取渠道，对于玩机狂热爱好者而言就是致残打击:)…">
+  <meta name="description" content="QQmsgrecordExtract (免ROOT提取QQ聊天记录)本文将以HUAWEI mate20为例，将记录文件从手机转移到电脑中再转移到虚拟机中，通过虚拟机的root权限获取文件并解析提取聊天记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QQmsgrecordExtract">
 <meta property="og:url" content="https://jacky-hate.github.io/2020/12/05/QQmsgrecordExtract/index.html">
 <meta property="og:site_name" content="Jackyhate&#39;Blog">
-<meta property="og:description" content="QQmsgrecordExtract (免ROOT提取QQ聊天记录)本文将以HUAWEI mate20为例，展示非ROOT方法提取qq聊天记录的方法 本地所有的 QQ 用户数据、聊天记录及其系统设置都存储在后缀名为 db 的数据文件中，文件大小不定。根据安卓权限，访问这些文件需要开启ROOT权限，而HUAWEI自18年以后关闭了手机解锁码的官方获取渠道，对于玩机狂热爱好者而言就是致残打击:)…">
+<meta property="og:description" content="QQmsgrecordExtract (免ROOT提取QQ聊天记录)本文将以HUAWEI mate20为例，将记录文件从手机转移到电脑中再转移到虚拟机中，通过虚拟机的root权限获取文件并解析提取聊天记录">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5hYBf3xkHeVbGk.88KbIUCxB7enorw6k7LpEihbSn2skq8WyJTqNET13BMVPZYUbGjLS1nAlo4ukzqFG*DEinug!/b&bo=DwEQAgAAAAADBz4!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcaeOq0KEZt21FjaKpLN35nHOXeCcFICAfs9D7a6RFP*XHROhhCE6FzLlolQJoFgYNtc5gCYcL8THEnl97FznegM!/b&bo=3wMnAwAAAAADF8o!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcc8iHeM.NqOYnghlzSUHjiavShp*WaOcAXbYi7ikHhmCuSIf4htjPZD4V0bQ.aEabqMnVXd7aJdNOs10wg6M*e4!/b&bo=sgOTAAAAAAADFxA!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5r*PJEdOOt4Mn0wnvwBVBNf5roo42xZdaIib9juf.Sl7M162txae1ObsKH.7KFzZiI85ljHWpSlP5rlmJG5RySA!/b&bo=8gAJAQAAAAADB9g!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcd2sn93DzEPKEcYHBT8Xj9kVU6ieGlsxs0skN.HXJP9pKa02Swpt4IkKyGt8CZI*NImQOeNCvDfkRnYhzOG4eHQ!/b&bo=HQOFAgAAAAADF6s!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcd2sn93DzEPKEcYHBT8Xj9kADRpyI7JN21MX67VPGTPOVnwiDf1CAsplHqtMBS4I10Z0VFlH.ffsbnjLVwmv*Ps!/b&bo=KAGDAQAAAAADF5k!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5l8vFSLPdS6aLOs8Ac*jctXfcMK2QsfIxGngPGyH1QSu46HxM2A.nntaazjo9tKuv8lSPUKBr4v6kubhrqRW2dc!/b&bo=KwTRAAAAAAADB9w!&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5oEajqXKUmspUKRPSp.g2cVg6QnxlErUBYy4eEaMtQCxR1e4dlv5Xz3O4vML**dQVFLYwLTjPooa6OzUlVZA7Bs!/b&bo=HgOwAgAAAAADB40!&rf=viewer_4">
 <meta property="article:published_time" content="2020-12-05T09:54:46.000Z">
-<meta property="article:modified_time" content="2020-12-05T10:19:12.651Z">
+<meta property="article:modified_time" content="2020-12-05T11:12:38.259Z">
 <meta property="article:author" content="Jackyhate">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5hYBf3xkHeVbGk.88KbIUCxB7enorw6k7LpEihbSn2skq8WyJTqNET13BMVPZYUbGjLS1nAlo4ukzqFG*DEinug!/b&bo=DwEQAgAAAAADBz4!&rf=viewer_4">
 
 <link rel="canonical" href="https://jacky-hate.github.io/2020/12/05/QQmsgrecordExtract/">
 
@@ -184,7 +193,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-05 17:54:46 / Modified: 18:19:12" itemprop="dateCreated datePublished" datetime="2020-12-05T17:54:46+08:00">2020-12-05</time>
+              <time title="Created: 2020-12-05 17:54:46 / Modified: 19:12:38" itemprop="dateCreated datePublished" datetime="2020-12-05T17:54:46+08:00">2020-12-05</time>
             </span>
 
           
@@ -200,9 +209,34 @@
       
         <meta name="referrer" content="no-referrer">
 
-<h1 id="QQmsgrecordExtract-免ROOT提取QQ聊天记录"><a href="#QQmsgrecordExtract-免ROOT提取QQ聊天记录" class="headerlink" title="QQmsgrecordExtract (免ROOT提取QQ聊天记录)"></a>QQmsgrecordExtract (免ROOT提取QQ聊天记录)</h1><p><em>本文将以HUAWEI mate20为例，展示非ROOT方法提取qq聊天记录的方法</em></p>
-<p>本地所有的 QQ 用户数据、聊天记录及其系统设置都存储在后缀名为 db 的数据文件中，文件大小不定。根据安卓权限，访问这些文件需要开启ROOT权限，而HUAWEI自18年以后关闭了手机解锁码的官方获取渠道，对于玩机狂热爱好者而言就是致残打击:)…想得到文件你得root，想root你得刷机，刷完机文件就么得了，于是无奈之下只好另寻他法。好消息是电脑版qq提供了聊天文件的新接口</p>
-<p><a target="_blank" rel="noopener" href="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5hYBf3xkHeVbGk.88KbIUCxB7enorw6k7LpEihbSn2skq8WyJTqNET13BMVPZYUbGjLS1nAlo4ukzqFG*DEinug!/b&bo=DwEQAgAAAAADBz4!&rf=viewer_4">图片</a></p>
+<h1 id="QQmsgrecordExtract-免ROOT提取QQ聊天记录"><a href="#QQmsgrecordExtract-免ROOT提取QQ聊天记录" class="headerlink" title="QQmsgrecordExtract (免ROOT提取QQ聊天记录)"></a>QQmsgrecordExtract (免ROOT提取QQ聊天记录)</h1><p><em>本文将以HUAWEI mate20为例，将记录文件从手机转移到电脑中再转移到虚拟机中，通过虚拟机的root权限获取文件并解析提取聊天记录</em></p>
+<a id="more"></a>
+
+<p>本地所有的 QQ 用户数据、聊天记录及其系统设置都存储在后缀名为 db 的数据文件中，文件大小不定。根据安卓权限，访问这些文件需要开启ROOT权限，而HUAWEI自18年以后关闭了手机解锁码的官方获取渠道，对于玩机狂热爱好者而言就是致残打击:)…想得到文件你得root，想root你得刷机，刷完机文件就么得了，于是无奈之下只好另寻他法。不过好消息是电脑版qq提供了聊天文件的新接口！</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5hYBf3xkHeVbGk.88KbIUCxB7enorw6k7LpEihbSn2skq8WyJTqNET13BMVPZYUbGjLS1nAlo4ukzqFG*DEinug!/b&bo=DwEQAgAAAAADBz4!&rf=viewer_4" alt="图片"></p>
+<p>于是就有如下思路</p>
+<h2 id="转移文件到电脑"><a href="#转移文件到电脑" class="headerlink" title="转移文件到电脑"></a>转移文件到电脑</h2><p>点击[聊天记录备份与恢复],选择[备份聊天记录到电脑]</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcaeOq0KEZt21FjaKpLN35nHOXeCcFICAfs9D7a6RFP*XHROhhCE6FzLlolQJoFgYNtc5gCYcL8THEnl97FznegM!/b&bo=3wMnAwAAAAADF8o!&rf=viewer_4" alt="图片"></p>
+<p>在手机上选择某些记录，选定保存位置，保存成功后，结果文件是一堆无后缀的文件，虽然不是db文件但无所谓，这些只是中间文件，我们只需要将其当作黑盒即可。</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcc8iHeM.NqOYnghlzSUHjiavShp*WaOcAXbYi7ikHhmCuSIf4htjPZD4V0bQ.aEabqMnVXd7aJdNOs10wg6M*e4!/b&bo=sgOTAAAAAAADFxA!&rf=viewer_4" alt="图片"></p>
+<h2 id="将文件转移到虚拟机"><a href="#将文件转移到虚拟机" class="headerlink" title="将文件转移到虚拟机"></a>将文件转移到虚拟机</h2><p>选择[恢复聊天记录到手机]，选定联系人，恢复完成</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5r*PJEdOOt4Mn0wnvwBVBNf5roo42xZdaIib9juf.Sl7M162txae1ObsKH.7KFzZiI85ljHWpSlP5rlmJG5RySA!/b&bo=8gAJAQAAAAADB9g!&rf=viewer_4" alt="pic"></p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcd2sn93DzEPKEcYHBT8Xj9kVU6ieGlsxs0skN.HXJP9pKa02Swpt4IkKyGt8CZI*NImQOeNCvDfkRnYhzOG4eHQ!/b&bo=HQOFAgAAAAADF6s!&rf=viewer_4" alt="pic"></p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/45NBuzDIW489QBoVep5mcd2sn93DzEPKEcYHBT8Xj9kADRpyI7JN21MX67VPGTPOVnwiDf1CAsplHqtMBS4I10Z0VFlH.ffsbnjLVwmv*Ps!/b&bo=KAGDAQAAAAADF5k!&rf=viewer_4" alt="pic"></p>
+<p>即将文件导入虚拟机中</p>
+<h2 id="获取-db文件"><a href="#获取-db文件" class="headerlink" title="获取.db文件"></a>获取.db文件</h2><p>以RE文件管理器为例，授予超级用户权限后在</p>
+<blockquote>
+<p>/data/data/com.tencent.mobileqq/databases/xxxx.db</p>
+</blockquote>
+<p>中提取文件，其中xxx为自己的QQ号。将文件共享到桌面进行编辑。</p>
+<h2 id="提取聊天记录"><a href="#提取聊天记录" class="headerlink" title="提取聊天记录"></a>提取聊天记录</h2><p>用notepad++打开文件观察到头部为SQLite</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5l8vFSLPdS6aLOs8Ac*jctXfcMK2QsfIxGngPGyH1QSu46HxM2A.nntaazjo9tKuv8lSPUKBr4v6kubhrqRW2dc!/b&bo=KwTRAAAAAAADB9w!&rf=viewer_4" alt="pic"></p>
+<p>下载并安装SQlite软件 <a target="_blank" rel="noopener" href="http://www.sqliteexpert.com/download.html">官方下载地址</a>，试用期30天 （<del>网上也有很多破解版和中文版</del>）</p>
+<p>打开文件，目录下找到许多名为mr_friend_xxxxxxxx_New的表其中xxxxx为好友qq号码md5加密值</p>
+<p>打开你想提取的好友的数据表，其中有许多列名，如msgdata代表聊天内容，time代表时间等，这些数据都是加密的。通过神通广大的网友的破解，加密方法一般是<strong>手机IMEI值和要加密的字符值异或操作</strong></p>
+<p>IMEI值可以在模拟器设置中看到</p>
+<p><img src="http://m.qpic.cn/psc?/V526bErm3JUMFb3KfA1q3xUu1M0GTJZU/ruAMsa53pVQWN7FLK88i5oEajqXKUmspUKRPSp.g2cVg6QnxlErUBYy4eEaMtQCxR1e4dlv5Xz3O4vML**dQVFLYwLTjPooa6OzUlVZA7Bs!/b&bo=HgOwAgAAAAADB40!&rf=viewer_4" alt="pic"></p>
+<p>具体的加密方案，网上已有方法，如<a target="_blank" rel="noopener" href="https://github.com/roadwide/qqmessageoutput">github</a>,自己装一个python环境即可提取。</p>
 
     </div>
 
@@ -280,7 +314,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QQmsgrecordExtract-%E5%85%8DROOT%E6%8F%90%E5%8F%96QQ%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">QQmsgrecordExtract (免ROOT提取QQ聊天记录)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QQmsgrecordExtract-%E5%85%8DROOT%E6%8F%90%E5%8F%96QQ%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">QQmsgrecordExtract (免ROOT提取QQ聊天记录)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E7%A7%BB%E6%96%87%E4%BB%B6%E5%88%B0%E7%94%B5%E8%84%91"><span class="nav-number">1.1.</span> <span class="nav-text">转移文件到电脑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E6%96%87%E4%BB%B6%E8%BD%AC%E7%A7%BB%E5%88%B0%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.2.</span> <span class="nav-text">将文件转移到虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-db%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">获取.db文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">提取聊天记录</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
